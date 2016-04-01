@@ -1,0 +1,140 @@
+$blue: #49ade9;
+$gray-text: #7e7e7e;
+
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 400;
+  src: url(../fonts/Roboto-Regular.ttf);
+}
+
+@mixin flexbox() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin inline-flexbox() {
+  display: -webkit-inline-box;
+  display: -moz-inline-box;
+  display: -ms-inline-flexbox;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+}
+
+@mixin flex($values) {
+  -webkit-box-flex: $values;
+  -moz-box-flex:  $values;
+  -webkit-flex:  $values;
+  -ms-flex:  $values;
+  flex:  $values;
+}
+
+@mixin justify-content($value) {
+  -webkit-justify-content: $value;
+     -moz-justify-content: $value;
+      -ms-justify-content: $value;
+          justify-content: $value;
+}
+
+body, p, h1, h2, h3, h4, h5 {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, Arial, sans-serif;
+  color: #212121;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: $blue;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+button {
+  min-width: 100px;
+  border: none;
+  background: $blue;
+  outline: none;
+  box-shadow: none;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  transition: background .3s;
+
+  &:hover {
+    background: darken($blue, 20%);
+  }
+}
+
+.flex-container {
+  @include flexbox();
+  @include justify-content(flex-start);
+}
+
+.gallery {
+  width: 500px;
+  margin: 20px auto 10px auto;
+}
+
+.main-image {
+  width: 100%;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+}
+
+.main-image img {
+  width: 100%;
+}
+
+.thumbnails {
+  margin: 20px 0 0 0;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+.thumbnail {
+  margin: 3px;
+  cursor: pointer;
+  filter: brightness(30%);
+  transition: filter .3s;
+
+  &:hover {
+    filter: brightness(100%);
+  }
+
+  &.active {
+    outline: 3px solid $blue;
+    filter: brightness(100%);
+  }
+}
+
+.buttons-container,
+.question {
+  text-align: center;
+}
+
+.buttons-container {
+  margin-top: 10px;
+}
+
+.message-container {
+  margin-bottom: 10px;
+  padding: 0 20px;
+  text-align: center;
+  color: $gray-text;
+}
+
+.info {
+  margin-top: 20px;
+  text-align: center;
+  color: $gray-text;
+}
