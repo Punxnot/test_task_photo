@@ -1,5 +1,5 @@
 (function() {
-  var agree, buttonClicks, buttonDismiss, data, disagree, dismiss, gender, getData, mainImageContainer, nameContainer, otherInfo, setImages, setInfo, setMainImage, setThumbnails, statistics, thumbsContainer;
+  var agree, buttonClicks, buttonsContainer, data, disagree, dismiss, gender, getData, mainImageContainer, nameContainer, otherInfo, setImages, setInfo, setMainImage, setThumbnails, statistics, thumbsContainer;
 
   getData = function() {
     return serverData.pop();
@@ -54,6 +54,8 @@
 
   mainImageContainer = document.getElementById("mainImageContainer");
 
+  buttonsContainer = document.querySelector(".buttons-container");
+
   nameContainer = document.getElementById("name");
 
   otherInfo = document.getElementById("other");
@@ -95,23 +97,21 @@
     return prepare();
   })();
 
-  buttonDismiss = document.getElementById("dismiss");
-
   document.addEventListener("click", function(e) {
     var allThumbs, allThumbsList;
     if (e.target.id === "dismiss" || e.target.id === "disagree" || e.target.id === "agree") {
+      buttonClicks += 1;
+      switch (e.target.id) {
+        case "dismiss":
+          dismiss += 1;
+          break;
+        case "disagree":
+          disagree += 1;
+          break;
+        case "agree":
+          agree += 1;
+      }
       if (serverData.length !== 0) {
-        buttonClicks += 1;
-        switch (e.target.id) {
-          case "dismiss":
-            dismiss += 1;
-            break;
-          case "disagree":
-            disagree += 1;
-            break;
-          case "agree":
-            agree += 1;
-        }
         data = getData();
         setImages();
         setInfo();
@@ -132,6 +132,9 @@
         if (buttonClicks >= 5) {
           return statistics.innerHTML = "Пропущено: " + dismiss + ", отказов: " + disagree + ", согласий: " + agree;
         }
+      } else {
+        buttonsContainer.classList.add("disabled");
+        return statistics.innerHTML = "Пропущено: " + dismiss + ", отказов: " + disagree + ", согласий: " + agree;
       }
     }
   });

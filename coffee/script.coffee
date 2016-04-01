@@ -33,9 +33,9 @@ setInfo = ()->
   else
     gender.innerHTML = "ним"
 
-
 thumbsContainer = document.getElementById("thumbsContainer")
 mainImageContainer = document.getElementById("mainImageContainer")
+buttonsContainer = document.querySelector(".buttons-container")
 nameContainer = document.getElementById("name")
 otherInfo = document.getElementById("other")
 statistics = document.getElementById("statistics")
@@ -65,15 +65,14 @@ window.ready = ( ->
   prepare()
 )()
 
-buttonDismiss = document.getElementById("dismiss")
 document.addEventListener("click", (e)->
   if e.target.id == "dismiss" or e.target.id == "disagree" or e.target.id == "agree"
+    buttonClicks += 1
+    switch e.target.id
+      when "dismiss" then dismiss += 1
+      when "disagree" then disagree += 1
+      when "agree" then agree += 1
     if serverData.length != 0
-      buttonClicks += 1
-      switch e.target.id
-        when "dismiss" then dismiss += 1
-        when "disagree" then disagree += 1
-        when "agree" then agree += 1
       data = getData()
       setImages()
       setInfo()
@@ -92,4 +91,7 @@ document.addEventListener("click", (e)->
       )
       if buttonClicks >= 5
         statistics.innerHTML = "Пропущено: #{dismiss}, отказов: #{disagree}, согласий: #{agree}"
+    else
+      buttonsContainer.classList.add("disabled")
+      statistics.innerHTML = "Пропущено: #{dismiss}, отказов: #{disagree}, согласий: #{agree}"
 )

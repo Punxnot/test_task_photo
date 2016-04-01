@@ -4,6 +4,7 @@ var gulp = require('gulp'),
   autoprefixer = require('gulp-autoprefixer'),
   plumber = require('gulp-plumber'),
   coffee = require('gulp-coffee'),
+  cssmin = require('gulp-cssmin'),
   concat = require('gulp-concat');
 
 // Scripts Task
@@ -19,6 +20,7 @@ gulp.task('concat', function(){
   gulp.src('js/*.js')
   .pipe(plumber())
   .pipe(concat('all.js'))
+  .pipe(uglify())
   .pipe(gulp.dest(''));
 });
 
@@ -28,6 +30,7 @@ gulp.task('styles', function() {
     .pipe(autoprefixer({
       browsers: ['> 1%']
     }))
+    .pipe(cssmin())
     .pipe(gulp.dest('css'));
 });
 

@@ -60,6 +60,7 @@ a {
 
 button {
   min-width: 100px;
+  padding: 5px 10px;
   border: none;
   background: $blue;
   outline: none;
@@ -81,7 +82,7 @@ button {
 
 .gallery {
   width: 500px;
-  margin: 20px auto 10px auto;
+  margin: 10px auto;
 }
 
 .main-image {
@@ -96,7 +97,7 @@ button {
 }
 
 .thumbnails {
-  margin: 20px 0 0 0;
+  margin: 10px 0 0;
   max-width: 100%;
   flex-wrap: wrap;
 }
@@ -123,7 +124,14 @@ button {
 }
 
 .buttons-container {
-  margin-top: 10px;
+  margin-top: 5px;
+   &.disabled {
+     pointer-events: none;
+
+     button {
+       background: lighten($blue, 20%);
+     }
+   }
 }
 
 .message-container {
@@ -134,7 +142,7 @@ button {
 }
 
 .info {
-  margin-top: 20px;
+  margin-top: 10px;
   text-align: center;
   color: $gray-text;
 }
